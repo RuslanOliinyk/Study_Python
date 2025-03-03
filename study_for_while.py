@@ -1,3 +1,39 @@
+"""Спискове включення(List Comprehension)"""
+squares = [x**2 for x in range(0, 11)] # [] - Використовується для створення списку на основі іншого списку або послідовності
+print(squares)
+
+even_numbers = [x for x in range(20) if x % 2 == 0]
+print(even_numbers)
+
+"""Генератор множин. Set Comprehension"""
+unique = {x**2 for x in [1, 2, 3, 3, 4, 4, 5]} # {} - створює множину без дублікатів
+print(unique)
+
+
+"""Генератор словників. Dictionary Comprehension"""
+unique = {x: x**2 for x in [1, 2, 3, 3, 4, 4, 5]} # {} - створює словник
+print(unique)
+
+
+"""Генератори (Замість списків). Не створює список а генерує значення по одному"""
+
+gen = (x**2 for x in range(5)) # Економить пам'ять тим що не створює одразу весь список, а генерує значення по одному. Для виводу наступного потрібно змінну обернути в - next()
+print(next(gen)) # 0
+print(next(gen)) # 1
+print(next(gen)) # 4
+print(next(gen)) # 9
+
+
+"""Вкладені цикли в рядок""" # Якщо треба перебрати два списки(або вкладений список), можна використовувати подвійний for
+products = [x * y for x in range(1, 4) for y in range(1, 4)] # Перемноження всіх комбінацій двох списків.
+print(products)
+
+
+
+
+-------------------------------------------------------------------------------
+
+
 for i in range(10, 0, -1):
     print(i)
 
@@ -134,3 +170,32 @@ def unique_numbers(number):
 
 output_list = unique_numbers(number)
 print(output_list)
+
+---------------------------------------------------------------------
+
+"""НСД"""
+num1 = int(input("Enter your first number: "))
+num2 = int(input("Enter your second number: "))
+longer = max(num1, num2)
+the_bigest_num = 0
+for i in range(1, longer + 1):
+    if num1 % i == 0 and num2 % i == 0:
+        the_bigest_num = i
+print(the_bigest_num)
+
+------------------------------
+
+
+"""Другий спосіб. Алгоритм Евкліда"""
+
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+num1 = int(input("Enter your first number: "))
+num2 = int(input("Enter your second number: "))
+
+the_bigest_num = gcd(num1, num2)
+
+print("The greatest common divisor is:", the_bigest_num)

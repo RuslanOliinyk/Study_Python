@@ -11,7 +11,7 @@ print("Apple", "Banana", "Cherry", sep=", ") #sep="" розділювальни�
 print("Hello", end=" --- ") #end="" те що ми ставимо в кінці рядка без переходу на інший
 print("World")
 
-with open("output.txt", "w") as f:
+with open("", "w") as f:
     print("Hello world", file=f) # Вивід у файлі
 
 print("1", "2", "3", "4", "5", sep="-")
