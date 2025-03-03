@@ -1,0 +1,6 @@
+This is new text in file
+
+Its also
+
+Third string
+
