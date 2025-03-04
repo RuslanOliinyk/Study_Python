@@ -276,7 +276,7 @@ print(user1.get_password())
 -------------------------------------------------------------------------------------------------------
 
 
-rom abc import ABC, abstractclassmethod
+from abc import ABC, abstractclassmethod
 
 class Shape(ABC):
     @abstractclassmethod
@@ -337,3 +337,127 @@ triangle1 = Triangle(4, 6)
 triangle1.calculate_area()
 triangle1.print_result()
 
+
+----------------------------------------------------------------------
+
+class User:
+    def __init__(self, name, gmail):
+        self.name = name
+        self.gmail = gmail
+
+    def greet(self):
+        print(f"Hello {self.name}")
+
+class Admin(User):
+    def ban_user(self, user):
+        print(f"User {user.name} has been banned!")
+
+# Приклад використання
+user1 = User("John", "john@example.com")
+admin1 = Admin("Alice", "alice@example.com")
+
+user1.greet()  # Виведе: Hello John
+admin1.ban_user(user1)  # Виведе: User John has been banned!
+
+
+
+---------------------------------------------------------------
+
+
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def print_result(self):
+        pass
+
+    def __str__(self):
+        return f"Shape: {self.__class__.__name__}"
+
+    def compare_area(self, other):
+        """Порівнює площу поточного об'єкта з іншою фігурою"""
+        if not isinstance(other, Shape):
+            raise TypeError("Можна порівнювати тільки об'єкти класу Shape")
+
+        if self.area() > other.area():
+            print(f"{self} has a larger area than {other}")
+        elif self.area() < other.area():
+            print(f"{other} has a larger area than {self}")
+        else:
+            print(f"{self} and {other} have the same area")
+
+    def scale(self, factor):
+        """Змінює розмір фігури у `factor` разів"""
+        raise NotImplementedError("Метод scale() повинен бути реалізований у підкласах")
+
+class Rectangle(Shape):
+    def __init__(self, h, w):
+        self.h = h
+        self.w = w
+
+    def area(self):
+        return self.h * self.w
+
+    def print_result(self):
+        print(f"The area of the rectangle ({self.h} × {self.w}) = {self.area()}")
+
+    def scale(self, factor):
+        self.h *= factor
+        self.w *= factor
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+
+    def area(self):
+        return round(3.14 * (self.r ** 2), 2)
+
+    def print_result(self):
+        print(f"The area of the circle (radius {self.r}) = {self.area():.2f}")
+
+    def scale(self, factor):
+        self.r *= factor
+
+class Triangle(Shape):
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+
+    def area(self):
+        return 0.5 * self.base * self.height
+
+    def print_result(self):
+        print(f"The area of the triangle (base {self.base}, height {self.height}) = {self.area()}")
+
+    def scale(self, factor):
+        self.base *= factor
+        self.height *= factor
+
+# Список фігур
+shapes = [
+    Rectangle(5, 26),
+    Rectangle(8, 6),
+    Circle(5),
+    Circle(3),
+    Triangle(10, 5),
+    Triangle(6, 8)
+]
+
+# Вивід результатів
+for shape in shapes:
+    print(shape)
+    shape.print_result()
+    print("-" * 30)
+
+# Порівняння площ
+shapes[0].compare_area(shapes[1])  # Порівнюємо два прямокутники
+shapes[2].compare_area(shapes[3])  # Порівнюємо два кола
+
+# Масштабування однієї з фігур
+print("\nScaling the first rectangle by a factor of 2...")
+shapes[0].scale(2)
+shapes[0].print_result()
